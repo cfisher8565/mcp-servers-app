@@ -41,9 +41,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
         inputSchema: {
           libraryName: z.string().describe('Library name to search for')
         },
-        outputSchema: z.object({
+        outputSchema: {
           libraries: z.array(z.any())
-        })
+        }
       },
       async ({ libraryName }) => {
         const apiKey = process.env.CONTEXT7_API_KEY;
@@ -73,9 +73,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
           topic: z.string().optional().describe('Optional topic to focus on'),
           tokens: z.number().optional().describe('Max tokens (default: 5000)')
         },
-        outputSchema: z.object({
+        outputSchema: {
           documentation: z.any()
-        })
+        }
       },
       async ({ context7CompatibleLibraryID, topic, tokens }) => {
         const apiKey = process.env.CONTEXT7_API_KEY;
@@ -114,9 +114,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
           inputSchema: {
             query: z.string().describe('Query or question')
           },
-          outputSchema: z.object({
+          outputSchema: {
             response: z.string()
-          })
+          }
         },
         async ({ query }) => {
           const apiKey = process.env.PERPLEXITY_API_KEY;
@@ -151,9 +151,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
           query: z.string(),
           engine: z.enum(['google', 'bing', 'yandex']).optional()
         },
-        outputSchema: z.object({
+        outputSchema: {
           results: z.array(z.any())
-        })
+        }
       },
       async ({ query, engine }) => {
         const apiToken = process.env.BRIGHTDATA_API_TOKEN;
@@ -176,9 +176,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
         inputSchema: {
           url: z.string().url()
         },
-        outputSchema: z.object({
+        outputSchema: {
           markdown: z.string()
-        })
+        }
       },
       async ({ url }) => {
         const apiToken = process.env.BRIGHTDATA_API_TOKEN;
@@ -200,9 +200,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
         inputSchema: {
           urls: z.array(z.string().url()).max(10)
         },
-        outputSchema: z.object({
+        outputSchema: {
           results: z.array(z.any())
-        })
+        }
       },
       async ({ urls }) => {
         const apiToken = process.env.BRIGHTDATA_API_TOKEN;
@@ -227,9 +227,9 @@ app.post('/mcp', async (req: Request, res: Response) => {
             engine: z.enum(['google', 'bing', 'yandex']).optional()
           })).max(10)
         },
-        outputSchema: z.object({
+        outputSchema: {
           results: z.array(z.any())
-        })
+        }
       },
       async ({ queries }) => {
         const apiToken = process.env.BRIGHTDATA_API_TOKEN;
