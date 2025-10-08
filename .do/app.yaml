@@ -1,0 +1,38 @@
+name: mcp-servers-app
+region: fra
+services:
+  - name: mcp-servers
+    github:
+      repo: cfisher8565/mcp-servers-app
+      branch: main
+      deploy_on_push: true
+    dockerfile_path: Dockerfile
+    http_port: 3000
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    health_check:
+      http_path: /health
+      initial_delay_seconds: 10
+      period_seconds: 30
+      timeout_seconds: 3
+      success_threshold: 1
+      failure_threshold: 3
+    envs:
+      - key: PORT
+        value: "3000"
+        scope: RUN_TIME
+      - key: NODE_ENV
+        value: production
+        scope: RUN_TIME
+      - key: CONTEXT7_API_KEY
+        value: ctx7_4XvBkyUq5Ag4XEq8qEpFNf83HKV
+        type: SECRET
+        scope: RUN_TIME
+      - key: PERPLEXITY_API_KEY
+        value: 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
+        type: SECRET
+        scope: RUN_TIME
+      - key: BRIGHTDATA_API_TOKEN
+        value: 13ee5e34-d2eb-4849-911b-8fb86e0d0bc7
+        type: SECRET
+        scope: RUN_TIME
